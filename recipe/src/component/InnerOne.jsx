@@ -1,8 +1,6 @@
-import styles from './InnerOne.module.css';
-
 function InnerOne({children}){
     return(
-        <div className={styles.inner}>
+        <div>
             {children}
         </div>
     )

@@ -1,0 +1,30 @@
+.recipestack{
+    /* background: rgba(26, 240, 171, 0.1); */
+	-webkit-backdrop-filter: blur(1px);
+	backdrop-filter: blur(1px);
+	border: 1px solid rgba(26, 240, 171, 0.25);
+    /* box-shadow: inset #fff 3px 3px 6px 1px,
+				inset #6e749b4d -2px -2px 6px 0;
+				border-radius: 8px; */
+}
+.recipeimg{
+    width: 300px;
+    height: 250px;
+    border-radius: 12px;
+    align-self: center;
+}
+.ingredients{
+    /* width: 380px;
+    height: 150px; */
+    /* align-items: center; */
+    background: rgba(26, 240, 171, 0.1);
+	-webkit-backdrop-filter: blur(1px);
+	backdrop-filter: blur(1px);
+	border: 1px solid rgba(26, 240, 171, 0.25);
+    box-shadow: inset #fff 3px 3px 6px 1px,
+				inset #6e749b4d -2px -2px 6px 0;
+				border-radius: 8px;
+}
+.itemimg{
+    background-color: transparent;
+}
