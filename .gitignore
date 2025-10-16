@@ -1,2 +1,4 @@
 .qodo
 recipe/src/component/containee.module.css
+recipe/node_modules
+recipe/.env

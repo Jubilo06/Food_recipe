@@ -1,0 +1,17 @@
+[build]
+  command = "cd recipe && pnpm install --frozen-lockfile && pnpm run build"
+  publish = "recipe/dist"
+
+[build.environment]
+  NPM_FLAGS = "--package-manager=pnpm"
+  NODE_VERSION = "22.20.0" 
+  NPM_CONFIG_IGNORE_SCRIPTS = "false"
+
+
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  
+  
