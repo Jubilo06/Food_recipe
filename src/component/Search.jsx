@@ -1,7 +1,7 @@
 import {useEffect, useState, useContext } from "react";
 import { TextField, Stack, IconButton, Icon, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import styles from "./Search.module.css"
+import styles from "./search.module.css"
 import { RecipeContext } from "./RecipeProvider";
 import Nav from "./Nav";
 import bg from '../assets/bg.webp'
