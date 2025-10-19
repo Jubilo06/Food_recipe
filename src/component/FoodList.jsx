@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { RecipeContext } from "./RecipeProvider";
-import styles from './foodItem.module.css'
+import styles from './fooditem.module.css'
 import { useNavigate } from "react-router-dom";
 import { Stack,Typography, Card, CardContent, CardActions, Button, CardMedia } from "@mui/material";
 import Aos from 'aos'
