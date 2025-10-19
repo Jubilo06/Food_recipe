@@ -24,7 +24,7 @@ function Nav(){
     return(
         <AppBar className={styles.navbar} sx={{backgroundColor:"#391300"}}>
             <Toolbar>
-                <Typography component={Link} sx={{fontWeight:900, fontSize:{xs:"10px", sm:'20px', color:'white', flexGrow:1, textDecoration: 'none'}}}> CIROC KITCHEN</Typography>
+                <Typography component={Link} sx={{fontWeight:900, fontSize:{xs:"25px", sm:'20px', color:'white', flexGrow:1, textDecoration: 'none'}}}> CIROC KITCHEN</Typography>
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <Stack direction='row' spacing={{xs:2, sm:5}}>
                             <Link  style={{textDecoration:'none', textTransform:'capitalize', color:'white', fontSize:'25px', fontWeight:700}} to='/'>Home</Link>

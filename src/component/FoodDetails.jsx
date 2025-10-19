@@ -50,7 +50,7 @@ function FoodDetails() {
   return (
     <Stack className={styles.recipestack} backgroundColor='#DE8c63'  data-aos='zoom-in'>
       <Stack direction="column" spacing={2}>
-        <Typography textAlign='center' fontWeight={900}  variant='h4' sx={{ color: "white", height:"auto", backgroundColor:"#2F1102", lineHeight:'auto', fontSize:{xs:"1em",sm:'1.5em' } }}>
+        <Typography textAlign='center' fontWeight={900}  variant='h4' sx={{ color: "white", height:"100px", backgroundColor:"#2F1102", lineHeight:'100px', fontSize:{xs:"1em",sm:'1.5em' } }}>
           {food.title}
         </Typography>
         <img
@@ -87,7 +87,7 @@ function FoodDetails() {
           height='auto' 
           >
             <Stack height='300px' p={2} width='250px' backgroundColor='transparent' direction="row" data-aos='zoom-in' >
-              <Card sx={{height:'100%',width:'100%', bgcolor:'#FFFDF2'}}>
+              <Card sx={{height:'100%',width:'100%', bgcolor:'#FFFFFF'}}>
                 <CardMedia component='img' height='150px' image={`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`}  alt={item.name} />
                 <CardContent>
                   <Typography variant="h6" sx={{color:"#0D544D",textAlign:'center'}}>{item.name}</Typography>        

@@ -5,7 +5,7 @@ export const RecipeContext = createContext();
 
 export function RecipeProvider({children}){
     const [foodData, setFoodData]=useState([]);
-    const [foodId, setFoodId]=useState("658615");
+    const [foodId, setFoodId]=useState("");
     const value={
         foodData, setFoodData,foodId, setFoodId
     }
