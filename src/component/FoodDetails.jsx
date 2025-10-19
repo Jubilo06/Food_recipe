@@ -50,7 +50,7 @@ function FoodDetails() {
   return (
     <Stack className={styles.recipestack} backgroundColor='#DE8c63'  data-aos='zoom-in'>
       <Stack direction="column" spacing={2}>
-        <Typography textAlign='center' fontWeight={900} pt={4} variant='h4' sx={{ color: "white", height:"auto", backgroundColor:"#2F1102" }}>
+        <Typography textAlign='center' fontWeight={900}  variant='h4' sx={{ color: "white", height:"auto", backgroundColor:"#2F1102", lineHeight:'auto', fontSize:{xs:"1em",sm:'1.5em' } }}>
           {food.title}
         </Typography>
         <img
@@ -76,7 +76,7 @@ function FoodDetails() {
           <strong>Ingredients</strong>
         </Typography>
         <Stack  spacing={{xs:0,sm:'initial', md:'initial'}} direction="row" justifySelf="center" alignSelf='center'
-        justifyContent={{xs:'center', sm:'space-between', md:'space-around'}} flexWrap='wrap' height='auto' width={{xs:'80%', md:"80%"}} 
+        justifyContent={{xs:'center', sm:'space-between', md:'space-between'}} flexWrap='wrap' height='auto' width={{xs:'80%', md:"80%"}} 
         backGroundColor='#FFFDF2'>
           {food?.extendedIngredients?.map((item) => (  
           <Stack
