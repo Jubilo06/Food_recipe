@@ -1,15 +1,36 @@
-import {Stack,AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem, } from "@mui/material";
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import styles from './logo.module.css'
-import MenuIcon from '@mui/icons-material/Menu';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Stack,
+  IconButton,
+  Menu,
+  MenuItem,
+  Container,
+  Button,
+} from "@mui/material";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import LocalPizzaRoundedIcon from "@mui/icons-material/LocalPizzaRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 
-function Nav(){
+const NAV_ITEMS = [
+  { label: "Home", targetId: "home", icon: <HomeRoundedIcon fontSize="small" /> },
+  { label: "About Us", targetId: "about", icon: <InfoRoundedIcon fontSize="small" /> },
+  { label: "Contact", targetId: "contact", icon: <EmailRoundedIcon fontSize="small" /> },
+];
+
+function Nav() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
-  // --- Handlers for the Mobile Menu ---
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -17,56 +38,236 @@ function Nav(){
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-  const handleNavigate = (path) => {
+
+  // Smooth scroll handler with sticky nav offset
+  const scrollToSection = (targetId) => {
     handleMenuClose();
-    navigate(path);
+
+    // If currently on a different page (e.g. /recipe/123), navigate home first
+    if (location.pathname !== "/") {
+      navigate(`/#${targetId}`);
+      return;
+    }
+
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const navOffset = 76; // Height of the sticky navbar
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
   };
-    return(
-        <AppBar className={styles.navbar} sx={{backgroundColor:"#391300"}}>
-            <Toolbar>
-                <Typography component={Link} sx={{fontWeight:900, fontSize:{xs:"25px", sm:'20px', color:'white', flexGrow:1, textDecoration: 'none'}}}> CIROC KITCHEN</Typography>
-                <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <Stack direction='row' spacing={{xs:2, sm:5}}>
-                            <Link  style={{textDecoration:'none', textTransform:'capitalize', color:'white', fontSize:'25px', fontWeight:700}} to='/'>Home</Link>
-                            <Link  style={{textDecoration:'none',color:'white', fontSize:'25px', fontWeight:700}}>About us</Link>
-                            <Link  style={{textDecoration:'none', color:'white', fontSize:'25px', fontWeight:700}}>Contact</Link>
-                        </Stack>
+
+  // Handle scrolling when arriving from an external route with a hash (e.g., /#about)
+  useEffect(() => {
+    if (location.pathname === "/" && window.location.hash) {
+      const targetId = window.location.hash.replace("#", "");
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        setTimeout(() => {
+          const navOffset = 76;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }, 150);
+      }
+    }
+  }, [location]);
+
+  return (
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={{
+        bgcolor: "rgba(15, 23, 42, 0.85)",
+        backdropFilter: "blur(14px)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        color: "#ffffff",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Toolbar disableGutters sx={{ minHeight: { xs: 64, sm: 72 } }}>
+          
+          {/* BRAND LOGO */}
+          <Box
+            onClick={() => scrollToSection("home")}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1.5,
+              cursor: "pointer",
+              flexGrow: 1,
+              userSelect: "none",
+            }}
+          >
+            <Box
+              sx={{
+                width: 38,
+                height: 38,
+                borderRadius: 2.5,
+                bgcolor: "#ea580c",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#ffffff",
+                boxShadow: "0 4px 12px rgba(234, 88, 12, 0.4)",
+              }}
+            >
+              <LocalPizzaRoundedIcon sx={{ fontSize: 22 }} />
+            </Box>
+
+            <Box>
+              <Typography
+                variant="h6"
+                component="span"
+                sx={{
+                  fontWeight: 900,
+                  fontSize: { xs: "1.15rem", sm: "1.3rem" },
+                  letterSpacing: "-0.02em",
+                  color: "#ffffff",
+                  display: "block",
+                  lineHeight: 1.1,
+                }}
+              >
+                CIROC{" "}
+                <Box
+                  component="span"
+                  sx={{
+                    color: "#fb923c",
+                  }}
+                >
+                  KITCHEN
                 </Box>
-                <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenuOpen}
-            color="#ffffff"
-          >
-            <MenuIcon htmlColor="white" />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-          >
-            <MenuItem  key="home" onClick={() => handleNavigate('/')}>Home</MenuItem>,
-            <MenuItem  key="about" onClick={() => handleNavigate('/about')}>About us</MenuItem>,
-            <MenuItem  key="contact" onClick={() => handleNavigate('/contact')}>Contact us</MenuItem>
-          </Menu>
-        </Box>
-                
-            </Toolbar>
-        </AppBar>
-    )
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.18em",
+                  color: "rgba(255, 255, 255, 0.5)",
+                  textTransform: "uppercase",
+                  fontWeight: 700,
+                }}
+              >
+                Recipe Directory
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* DESKTOP NAVIGATION */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}>
+            <Stack direction="row" spacing={1} alignItems="center">
+              {NAV_ITEMS.map((item) => (
+                <Button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.targetId)}
+                  sx={{
+                    px: 2.5,
+                    py: 1,
+                    borderRadius: 3,
+                    textTransform: "none",
+                    fontSize: "0.925rem",
+                    fontWeight: 700,
+                    color: "rgba(255, 255, 255, 0.85)",
+                    transition: "all 0.2s ease",
+                    "&:hover": {
+                      color: "#fb923c",
+                      bgcolor: "rgba(255, 255, 255, 0.08)",
+                    },
+                  }}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </Stack>
+          </Box>
+
+          {/* MOBILE MENU TOGGLE */}
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="medium"
+              aria-label="open mobile navigation"
+              onClick={handleMenuOpen}
+              sx={{
+                bgcolor: "rgba(255, 255, 255, 0.06)",
+                color: "#ffffff",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: 2.5,
+                "&:hover": { bgcolor: "rgba(255, 255, 255, 0.12)" },
+              }}
+            >
+              {isMenuOpen ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
+            </IconButton>
+
+            {/* MOBILE DROPDOWN MENU */}
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={isMenuOpen}
+              onClose={handleMenuClose}
+              sx={{
+                "& .MuiPaper-root": {
+                  mt: 1.5,
+                  minWidth: 200,
+                  bgcolor: "#0f172a",
+                  color: "#ffffff",
+                  borderRadius: 4,
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.5)",
+                  p: 1,
+                },
+              }}
+            >
+              {NAV_ITEMS.map((item) => (
+                <MenuItem
+                  key={item.label}
+                  onClick={() => scrollToSection(item.targetId)}
+                  sx={{
+                    py: 1.25,
+                    px: 2,
+                    my: 0.5,
+                    borderRadius: 2.5,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.5,
+                    fontSize: "0.9rem",
+                    fontWeight: 600,
+                    color: "#cbd5e1",
+                    "&:hover": {
+                      bgcolor: "rgba(255, 255, 255, 0.08)",
+                      color: "#fb923c",
+                    },
+                  }}
+                >
+                  {item.icon}
+                  {item.label}
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
+
 export default Nav;

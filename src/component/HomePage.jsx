@@ -7,7 +7,7 @@ import ContactUs from './ContactUs';
 
 function HomePage() {
   return (
-    <Stack backgroundColor='#FEF1DE'>
+    <Stack id='home' backgroundColor='#FEF1DE'>
         <Search />
         <FoodList />
         <AboutUs />
